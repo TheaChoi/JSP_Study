@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board"><!--namespace의 아이디를 통해 들어온다-->
+	
+	<insert id="insertBoard" parameterType="board.BoardDTOIn">  <!-- 태그를 실행시킬 때 BoardDTOIn 객체의 데이타를 넘겨줌 -->
+		
+		insert into board set title=#{title}, content=#{content}, count=0, reg_date=now();
+		<!-- #{}는 parameterType의 객체로 들어가서 해당되는 요소의 getter를 실행시키라는 뜻 -->
+		
+	</insert>
+	
+	<select id="selectList" resultType="hashmap">
+      
+      select num, title, count, reg_date from board order by num desc;
+   
+   </select>
+   
+   <select id="selectPage" parameterType="board.PageIn" resultType="hashmap">
+   	
+   		select num, title, content, count, reg_date from board 
+   		order by num desc limit #{start}, #{pageSize};
+   </select>
+   
+   <select id="selectCount" resultType="hashmap">
+   		select count(*) from board; 
+   </select>
+   
+   <select id="selectCountFind" parameterType="board.PageIn" resultType="hashmap">
+   		<if test="mode==1">
+   			select count(*) from board where title like #{word};
+   		</if>
+   		<if test="mode==2">
+   			select count(*) from board where content like #{word};
+   		</if>
+   		<if test="mode==3">
+   			select count(*) from board where title like #{word} or content like #{word};
+   		</if>
+   </select>
+   
+   <select  id="selectContent" parameterType="int" resultType="board.ContentDTOOut"> <!-- ContentDTOOut로 객체 만들어주어야함. 
+   																			기본생성자로 객체만들기. 근데 왜 setter없어도 작동되냥?? -->
+      select num, title, content, count, reg_date from board where num=#{num};
+   </select>
+   
+   <delete id="deleteContent" parameterType="int">
+   		delete from board where num=#{num};
+   </delete>
+   
+   <select id="selectPageFind" parameterType="board.PageIn" resultType="hashmap">
+   		<if test= 'mode == 1'>
+   			select num, title, content, count, reg_date from board where title like #{word} order by num desc limit #{start}, #{pageSize};
+   		</if>
+   		<if test='mode == 2'>
+   			select num, title, content, count, reg_date from board where content like #{word} order by num desc limit #{start}, #{pageSize};
+   		</if>
+   		<if test='mode == 3'>
+   			select num, title, content, count, reg_date from board where title like #{word} <!-- count빠뜨려서null.. -->
+   			or content like #{word} order by num desc limit #{start}, #{pageSize}; <!-- 작은따옴표없어야함 -->
+   		</if>
+   </select>
+   
+</mapper>
