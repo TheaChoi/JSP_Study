@@ -1,0 +1,385 @@
+@charset "utf-8";
+
+/* reset css */
+
+/*
+@font-face {
+	font-family:'Nanum Gothic';    //이 경우에는 font-family를 아무이름이나 해서 통일시켜도 된다.
+	font-style:normal;
+	font-weight:400;
+	src: url (../fonts/NanumGothic-Regular.eot);
+	src: url (../fonts/NanumGothic-Regular.woff) format('woff'),            // truetype 글꼴 추가할 땐 ';' 말고 ',' 사용한다 
+		 url (../fonts/NanumGothic-Regular.ttf) format('truetype');
+	}
+@font-face {
+	font-family:'Nanum Gothic';
+	font-style:normal;
+	font-weight:700;
+	src: url (../fonts/NanumGothic-Bold.eot);
+	src: url (../fonts/NanumGothic-Bold.woff) format('woff'),
+		 url (../fonts/NanumGothic-Bold.ttf) format('truetype');
+	}
+@font-face {
+	font-family:'Nanum Gothic';
+	font-style:normal;
+	font-weight:800;
+	src: url (../fonts/NanumGothic-ExtraBold.eot);
+	src: url (../fonts/NanumGothic-ExtraBold.woff) format('woff'),
+	     url (../fonts/NanumGothic-ExtraBold.ttf) format('truetype');
+	} 
+*/ 
+
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);  /* css 이름과 font-family 이름이 같아야 한다*/
+body {font-family: 'Nanum Gothic', sans-serif;}
+
+* {margin:0; padding:0; box-sizing:border-box;}
+h1,h2,h3,h4,h5,h6 {font-weight:normal; font-size:14px;}
+ol, ul {list-style:none;}
+a {text-decoration:none; color:#313131; font-size:14px; cursor:pointer;}
+section, article, nav,aside, footer, header {display:block;}
+table {border-collapse:collapse; border-spacing:0;}
+html, body {width:100%; height:100%;}   /* 백그라운드가 꽉 차도록, backgournd height에도 height:100%*/ 
+strong {font-weight:normal; font-size:14px;}
+
+/* commom css */
+.imgw100 {width:100%;}
+.imgm100 {max-width:100%;}
+.readonly {text-indent:-9999px; display:none;}
+.imgw50 {width:100%; height:200px;}
+
+
+/* loading css */
+
+.load_bg {background:url(../images/bg_load.jpg) no-repeat center center; background-size:cover; height:100%;}  /*url 과 괄호 사이 띄어쓰지말기 */
+.load_bg h1 {color:#fff; font-size:46px; text-align:center; padding-top:30%; font-weigth:800;}
+.load-box {padding-top:50%; margin-top:-30%; }
+.load {border:16px solid #c8c8c8; border-top:16px solid #f26522; border-radius:50%; width:120px; height:120px; margin:0 auto; animation:spin 2s linear infinite;}
+@keyframes spin {
+	0% {transform:rotate(0deg);} /* rotate와 괄호 사이 띄어쓰지않기 */
+	100% {transform:rotate(360deg);}
+}
+
+
+/* main css */
+.header {backgournd-color:#e4e4e4; border-bottom:1px solid #e1dfdf; position:relative;padding-bottom:16px;} /* 로고와 아이콘들을 헤더 안에 나란히 넣기 위해 포지셔 기법 사용 */
+.header .btn_gnb {position:absolute; left:15px; top:15px;}
+.header h1.logo {padding-top:19px; text-align:center; font-weight:800; font-size:18px;}   /* position:absolute 상태에서는 margin:0 auto 또는 text-align이 먹히지 않는다*/
+.header .btn_search {position:absolute; right:15px; top:15px;}
+.header h1 span {color:#f26522;}
+.header i.headericon {font-size:18px; color:#4a4a4a; }
+.header a {padding:3px;}
+
+
+
+/* navi css */
+
+
+#slidebar-wrapper {position:fixed; left:0; top:0; width:252px; height:100%; background-color:#fff; z-index:9999; 
+transform:translateX(-252px); transition:all 0.4s ease 0s;}
+
+#slidebar-wrapper.active {
+left:250px; width:250px; transition:all 0.4s ease 0s;}
+
+.slidebarwrap {padding:30px 0 40px 0; width:252px; height:200px; background-color:#ffc054;}
+.btn-close {color:#fff; font-size:25px; font-weight:700; padding:16px; float:right;}
+.slidebar-brand {
+	width:150px; height:150px; border-radius:100%; border:3px solid #d2d3d3; background:url(../images/prof.jpg) no-repeat center center; margin:0 auto; background-size:cover;
+}
+
+.sidebar-nav {clear:both;}
+.sidebar-nav li {height:50px; border-bottom:1px solid rgba(210,210,210,.5);}
+.sidebar-nav li i {width:36px; height:36px; border-radius:100%; border:2px solid #d2d3d3; background-color:#ffc054; text-align:center; line-height:30px; margin:8px 16px;}
+.sidebar-nav li.active i {background-color:#ff7800;}
+.sidebar-nav li.active a {color:#ff7800;}
+.sidebar-nav li a {color:#373532; font-size:15px; font-weight:700;}
+i.navicon {color:#d2d3d3; font-size:16px; line-height:15px;}
+
+
+/*.main_visual {
+	background:url(../images/main_wrap.jpg) no-repeat center center;height:198px;background-size:cover;
+}*/
+
+.main_visual {position:relative; height:198px; width:100%;}
+.main_visual .inner {height:198px;}
+.backgroundimg {background-size:cover; position:absolute; left:0;
+top:0;height:198px; width:100%;}
+#back1 {background:url(../images/main1.jpg) no-repeat center center;}
+#back2 {background:url(../images/main2.jpg) no-repeat center center;}
+#back3 {background:url(../images/main3.jpg) no-repeat center center;}
+#back4 {background:url(../images/main4.jpg) no-repeat center center;}
+#back5 {background:url(../images/main5.jpg) no-repeat center center;}
+@keyframes backgroundchangeFadeInout {
+	0% {opacity:1;}
+	17% {opacity:1;}
+	25% {opacity:0;}
+	92% {opacity:0;}
+	100% {opacity:1;}
+}
+.backgroundchange div:nth-of-type(1) {
+	animation-delay:10s;
+}
+.backgroundchange div:nth-of-type(2) {
+	animation-delay:8s;
+}
+.backgroundchange div:nth-of-type(3) {
+	animation-delay:6s;
+}
+.backgroundchange div:nth-of-type(4) {
+	animation-delay:4s;
+}
+.backgroundchange div:nth-of-type(5) {
+	animation-delay:2s;
+}
+
+.backgroundchange div {
+	animation:backgroundchangeFadeInout 10s ease-in-out infinite;
+}
+
+.bar-search {background:#fff; height:48px; display:none;}
+.bar-search .inner {padding:5px 10px; position:relative;}
+.bar-search .inner input {border-radius:3px; border:1px solid #ccc; text-align:left; width:99%; height:38px; padding-left:10px; margin-top:8px;color:#ddd;}
+
+
+
+.rec_cont h2 {margin-top:15px;padding:18px 0; text-align:center; color:#f26522; font-size:16px;font-weight:700;}
+.rec_cont_txt {padding:0 6%;}
+.rec_cont_txt p.more {text-align:right;}
+.rec_cont_txt i.moreicon {color:#f26522; font-size:13px; }
+.rec_cont p.more a {color:#f26522; font-size:13px; }
+.rec_cont_txt p span {font-weight:700;}
+p.rec_cont_p {font-size:13px; margin-bottom:20px;}
+
+.best_cont {padding:14px; overflow:hidden;}
+.best_cont h2 {padding:14px 0; text-align:center; color:#f26522; font-size:16px; font-weight:700;}
+.best_cont ul li {width:100%; margin-bottom:20px; height:300px;  display:cover;}
+.best_cont ul li:nth-child(odd) {margin-right:4%;}   /*  홀수:odd  ,  짝수:even   를 nth-child()괄호안에 넣기*/
+.best_cont ul li a span {font-size:14px; font-weight:700; line-height:23px;letter-spacing:-1px; color:#f26522; display:block;}
+.best_cont ul li a p {letter-spacing:-1px; font-size:13px;}
+.best_cont ul li a img {margin:14px 0;}
+
+
+.tab_cont {clear:both;overflow:hidden; margin:22px 0;}
+.tab_cont ul li {width:50%; float:left; height:52px; text-align:center; background-color:#f7ab50; color:#555555; font-size:17px; font-weight:700; padding:15px 0;}
+.tab_cont ul li:nth-child(1) {border-right:1px solid #f26522;}
+
+.tab_cont ul li.active {background-color:#f26522; }
+.tab_cont ul li.active a {color:#fff;}
+
+.footer {clear:both; background-color:#363636; height:46px; display:table; width:100%;}  /*   !!!  float 시키면 아버지는 overflow:hidden,  아래 쪽에는 clear:both 를 반드시 해준다. */
+.footer p { text-align:center; color:#fff; letter-spacing:-1px; font-size:15px; display:table-cell; vertical-align:middle;} /* 박스 안 내용을 수직 정렬 하려면 테이블셸로 바꾼후 버티컬얼라인 미들 해준다.*/
+
+
+/* sub css */
+
+.sub-title-group {background-color:#ffc054; border-bottom:1px solid #ffc054; height:46px; line-height:46px; padding-left:16px;}
+.sub-title1 {color:#fff; font-size:16px;  font-weight:700; }
+.sub-contents {padding:16px;}
+.sub-contents  ul li {margin-bottom:16px;}
+.sub-contents .sub-table {display:table;}
+.sub-contents .sub-table .sub-table-cell1 {display:table-cell;}
+.sub-contents .sub-table .sub-table-cell2 {display:table-cell; vertical-align:top; padding-left:16px;}
+.sub-contents .sub-title2 {display:block; font-weight:700; padding-bottom:12px;}
+
+.paging {border-top:2px solid #fcc463; padding:12px 5px 12px 18px; text-align:center; overflow:hidden;}
+.paging > a {padding:8px; display:inline-block;}   /*a는 원래 inline이기 때문에 padding을 주려면 block속성을 쓸 수 있어야 한다  */
+.paging strong {color:#f1761a; font-weight:700; text-decoration:underline; padding:8px;}
+.top {text-align:center; width:50px; height:55px; float:right;}
+.top a {display:block; font-size:10px; color:#fcc463; padding-bottom:5px;}
+.top i {font-size:27px; }
+
+/* login css */
+.loginbox {padding:30px 16px 16px;}
+.loginbox p {text-align:center;}
+.loginbox p span.p1 {font-size:18px; color:#394e5c; display:block; margin-bottom:20px; font-weight:700;}
+.loginbox p span.p2 {color:#394e5c; font-size:16px; display:block;}
+.loginbox p span.p3 {color:#f26522; font-weight:700;}
+.pdt20 {padding-top:20px;}
+.login li input {padding:15px 0px 15px 15px; width:100%; border:1px solid #ddd; font-size:16px; }
+.login ul {overflow:hidden;}
+.login li:nth-child(1) {margin-bottom:16px;}
+.login li:nth-child(2) {margin-bottom:16px;}
+.login li:nth-child(3) {margin-right:4%; background-color:#f26522;}
+.login li:nth-child(4) {background-color:#3b54e8;}
+.login li:nth-child(3), .login li:nth-child(4) {width:48%; float:left; text-align:center; margin-bottom:14px;}
+.login li:nth-child(5) {clear:both; text-align:center; background-color:#ccc;display:block;}
+
+.login li a {width:100%; padding:15px 0; display:inline-block; color:#fff;} /*inline-block*/
+
+/* join css */
+
+.join {overflow:hidden; font-size:16px; font-family:"Nanum Gothic";}
+.join li input {padding:15px; width:100%; border:1px solid #ccc; }
+.join li input.id {width:70%; margin-right:1%;}
+.join li .idcheck {width:27%; padding:15px; font-family:"Nanum Gothic"; display:inline-block; background:#3b54e8; color:#fff; text-align:center;}
+.join li {margin-bottom:16px; overflow:hidden;}
+.join li select {border:1px solid #ccc; padding:15px; width:33%;}
+.join li input.tel2, .join li input.tel3 {width:32%; text-align:center;}
+.join li input.emailid {width:60%;float:left;margin-right:4%; }
+.join li select.emailser {width:36%; float:left;}
+.join li.ok a , .join li.cancel a {width:100%; padding:16px 0; display:inline-block; color:#fff;}
+.join li.ok {clear:both; width:70%; background:#f26522; text-align:center; margin:20px 4% 0 0;float:left;}
+.join li.cancel {width:25%;text-align:center; background:#bbb; margin-top:20px;float:left;}
+
+
+/* admin css */
+
+.adminbox {padding:30px 16px 16px; overflow:hidden;}
+.hidden, caption, legend {font-size:0; width:0; height:0; color:transparent; line-height:0;} 
+.list {width:100%; border-top:1px solid #fcc463;}
+.list th {text-align:center; padding:15px 0 13px 0; font-weight:bold; color:#494949;}
+.list tr:first-child td {border-top:1px solid #d1d1d1;}
+.list td {color:#494949; text-align:center; height:18px; padding:15px 0 13px 0; border-top:1px solid #d1d1d1;}
+.adminbox ul li input[type="file"] {position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; margin-bottom:15px;}
+textarea {resize:none; width:100%; height:200px; border:1px solid #ccc; margin-bottom:16px;}
+.adminbox ul li label.filebox {display:inline-block; padding:12px 20px; color:#999; font-size:16px; line-height:normal; vertical-align:middle; background-color:#fdfdfd;
+cursor:pointer; border:1px solid #ccc; width:100%;}
+.admin li input {padding:15px 0px 15px 15px; width:100%; border:1px solid #ddd; font-size:16px; margin-bottom:15px;}
+button.ok {background-color:#f00; padding:10px 18px; border:0 none; color:#fff;}
+button.cancel {background-color:#ccc; padding:10px 18px; border:0 none; color:#fff;}
+.adminbox .admin li:nth-child(4) button {width:100%; clear:both; background:#fcc463; margin-top:15px;}
+
+
+/* trip-view css */
+
+.one-contents img {width:100%; height:200px; overflow:cover;}
+.one-contents-p {overflow:hidden; margin:10px 20px;color:#333;}
+.one-contents-p span {font-weight:bold; font-size:16px; line-height:50px;}
+.one-contents-p p {font-size:14px; line-height:20px; }
+.sns-box {float:right;}
+.sns-box span {padding-right:14px; text-align:right;}
+
+.sns-box { padding-top: 16px;border-top: 1px solid #ccc;width: 100%;overflow: hidden;}
+.sns-box .list {text-align: center;background: #00f;
+width: 20%;height: 35px;line-height: 35px;float: left;
+color: #fff;}
+.sns-box .sns-icon {width: 60%;text-align: center;
+margin: 0 auto;float: left;}
+.sns-box .top {text-align: center;background: #f00;width: 20%;height: 35px;line-height: 35px;float: right;
+}
+.sns-box .top a, .sns-box .list a {display: block; color: #fff;}
+
+/* map css */
+
+.map {margin-bottom:16px;}
+
+#back1,#back2,#back3,#back4,#back5 {
+		background-size:cover;
+	}
+
+@media (min-width:768px) {
+	
+	.load_bg h1 {
+		padding-top:20%;
+	}
+	.load-box {
+		padding-top: 30%;
+		margin-top: -40px;
+	}
+	.main_visual {
+		height: 300px;
+		clear:both;
+		margin-top:80px;
+	}
+	.main_visual .inner {
+		height: 300px;
+	}
+
+	.backgroundimg {
+		height: 300px;
+	}
+
+	.best_cont ul li {
+		width:49% !important;
+		height:300px;
+		margin-top:20px;
+		float:left;
+		margin-right:2% !important;
+		
+	}
+	.best_cont ul li:nth-child(2n) {
+		margin-right:0 !important;;
+	}
+	#slidebar-wrapper {
+		width: 100%; height: 20px; line-height:20px;
+		background-color:transparent;
+		z-index: 9999; position: relative;
+		transform: translateX(0px);
+		transition-property:none;
+		position:absolute;
+			}
+	.tab_bar {clear:both;}		
+	
+	#slidebar-wrapper ul li {float:left; width:16%; text-align:center;height:60px;line-height:40px; padding-bottom:50px;}
+	#slidebar-wrapper ul li a {color:#4c4c4c;}
+	
+	
+	#slidebar-wrapper >.btn-close, #slidebar-wrapper >.btn-close > i, #slidebar-wrapper .slidebarwrap, #sidebar-wrapper .sidebar-nav i  {display:none;}
+	
+	.sidebar-nav {padding-top:20px;}
+	
+	.btn-close, .btn_gnb {display:none;}
+	
+	.sub-title-group, .loginbox {margin-top:70px;}
+	
+}
+@media (min-width:1200px) {
+	
+	body {font-size:20px;}
+	.load-box {
+		padding-top: 20%;
+		margin-top: -10px;
+	}
+	 .tab_bar, .sub-title-group h2, .sub-contents, .login, .footer p {
+		width:1200px;
+		margin:0 auto;
+	}
+	 .tab_bar {
+		 overflow:hidden;
+		 padding:0;
+	 }
+	 .best_cont li {
+		width: 32.5% !important;
+		margin-right: 1% !important;
+	}
+	.header {width:100%;}
+
+	#slidebar-wrapper {
+		width: 100%;
+		margin:0 auto;
+	}
+	.sub-contents ul li img {
+	width:150%;
+	}
+
+	.sub-contents .sub-table > .sub-table-cell2 {
+		padding-left: 12%;
+	}
+	
+	.main_visual .inner {
+		height: 500px;
+	}
+	
+	.backgroundimg {
+		height: 500px;
+		
+	}
+	.rec_cont {
+	margin-top:230px;}
+	
+	.sub-title-group, .loginbox {margin-top:70px;}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
