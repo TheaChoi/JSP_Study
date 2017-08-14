@@ -8,7 +8,14 @@
 </head>
 <body>
 
+	<h1>서블릿 매핑 예제 </h1>
+	<br>
+	<a href="login.mem">로그인 서블릿 매핑</a><br><br>
+	<a href="reg.mem">회원가입 서블릿 매핑</a>
+	<br><br><br><br>
 	
-
+	
+	<a href="write.board"> 게시판 글 쓰기</a><br><br>
+   	<a href="read.board">게시판 글 읽기</a>
 </body>
 </html>
