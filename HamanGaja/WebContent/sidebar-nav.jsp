@@ -37,8 +37,8 @@
 			<li id="main"><i class="fa fa-pencil-square-o navicon"></i><a href="/HamanGaja/admin/write.jsp">글쓰기</a></li>
 			<li id="trip"><i class="fa fa-fort-awesome navicon"></i><a href="/HamanGaja/admin/List.board?pageNo=0&pageSize=5&viewStart=0&viewEnd=5&type=관광지">관광지</a></li>
 <!-- 			HOME에서 넘어가려면 절대경로여야 오류없이 찾아간다. -->
-			<li id="restaurant"><i class="fa fa-cutlery navicon"></i><a href="/HamanGaja/admin/List.board?pageNo=0&pageSize=5&type=맛집">맛집</a></li>
-			<li id="specialty"><i class="fa fa-shopping-basket navicon"></i><a href="/HamanGaja/admin/List.board?pageNo=0&pageSize=5&type=특산물">특산물</a></li>
+			<li id="restaurant"><i class="fa fa-cutlery navicon"></i><a href="/HamanGaja/admin/List.board?pageNo=0&pageSize=5&viewStart=0&viewEnd=5&type=맛집">맛집</a></li>
+			<li id="specialty"><i class="fa fa-shopping-basket navicon"></i><a href="/HamanGaja/admin/List.board?pageNo=0&pageSize=5&viewStart=0&viewEnd=5&type=특산물">특산물</a></li>
 			<li><i class="fa fa-user-o navicon"></i><a href="logout.admin">로그아웃</a></li>
 		</ul>
 	</nav>
