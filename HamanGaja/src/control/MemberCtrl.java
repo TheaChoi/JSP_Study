@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.MemDAO;
 import dto.MemDTOIn;
+import dto.ModDTOIn;
+import dto.infoDTOOut;
 
 
 @WebServlet("*.mem")
@@ -35,7 +37,7 @@ public class MemberCtrl extends HttpServlet {
     	String cmd = uri.substring(path.length()+1);
     	System.out.println("uri: "+uri);
     	System.out.println("path: "+path);
-    	return cmd;
+    	return cmd;	
     }
     
     //Redirect로 이동함 : request 객체가 새로 만들어짐 (로그인은 세션을 이용하므로 어느것을 사용해도 무방)
@@ -123,6 +125,75 @@ public class MemberCtrl extends HttpServlet {
     		out.print("{\"ret\":false}");
     	}
     }
+    
+    void pwCheck(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+    
+    	String pw = request.getParameter("pw");
+    	System.out.println("pwChek:"+pw);
+    	PrintWriter out = response.getWriter();
+    	if(dao.pwCheck(pw)==true){
+    		out.print("{\"ret\":true}");
+    		System.out.println("비밀번호 같은");
+    		out.close();
+    	}else{
+    		out.print("{\"ret\":false}");
+    		System.out.println("비밀번호 다름");
+    		out.close();
+    		
+    	}
+    }
+    
+    void del(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+    	
+    	//1. 회원탈퇴 아이디를 가져옴
+    	HttpSession session = request.getSession();
+    	String UserId = (String)session.getAttribute("USERID");
+    	PrintWriter out = response.getWriter();
+    	System.out.println("회원탈퇴 아이디:"+UserId);
+    	if(dao.del(UserId)==true){
+    		//세션에 저장해 놓은 로그인 정보 기타 개인정보를 모두 삭제
+    		session.invalidate();
+			out.print("{\"ret\":true}");
+			sendRedirect(response, "main.jsp");
+    	}else{
+    		out.print("{\"ret\":false}"); //json형식을 out객체로 출력
+        	
+    	}
+    }
+    
+    void info(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, ServletException{
+    	
+    	HttpSession session = request.getSession();
+    	String USERID = (String)session.getAttribute("USERID");
+    	infoDTOOut dto = dao.info(USERID); //회원정보를 가지고 있는 DTO를 반환 받음
+    	
+    	//회원정보 DTO를 modInfo.jsp로 전달
+    	request.setAttribute("infoDTOOut", dto);
+    	forward(request, response, "modInfo.jsp");
+    }
+    
+    void mod(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
+    	//1.세션 내장객체를 가져오고, 세션 객체에 있는 로그인 아이디 정보를 가져옴
+    	HttpSession session = request.getSession();
+    	PrintWriter out = response.getWriter();
+    	String USERID = (String)session.getAttribute("USERID");
+    	//2.변경할 개인정보
+    	String pw = request.getParameter("pw1");
+    	String phone = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
+    	String email = request.getParameter("emailid")+"@"+request.getParameter("emailser");
+    	
+    	ModDTOIn dto = new ModDTOIn(USERID, pw, phone, email);
+    	
+    	if(dao.mod(dto)==true){
+    		System.out.println("회원정보수정 완료");
+    		out.print("{\"ret\":true}");
+    		
+    	}else{
+    		System.out.println("회원정보 수정 실패");
+    		out.print("{\"ret\":false}");
+    	}
+    	
+    }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -139,8 +210,17 @@ public class MemberCtrl extends HttpServlet {
 				login(request, response);
 			}else if(cmd.equals("logout.mem")==true){
 				logout(request, response);
-			}else if(cmd.equals("idCheck.mem")==true){
+			}else if(cmd.equals("idCheck.mem")==true){ //아이디 중복체크
 				idCheck(request, response);
+			}else if(cmd.equals("pwCheck.mem")==true){
+				pwCheck(request, response);
+			}else if(cmd.equals("info.mem")==true){
+
+				info(request, response);
+			}else if(cmd.equals("del.mem")==true){  //회원탈퇴
+				del(request, response);
+			}else if(cmd.equals("mod.mem")==true){
+				mod(request, response);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
