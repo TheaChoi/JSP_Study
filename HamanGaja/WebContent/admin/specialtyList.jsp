@@ -29,6 +29,8 @@
 					<input type="hidden" name="pageNo" value="0">  
 					<input type="hidden" name="pageSize" value="5">
 					<input type="hidden" name="type" value="관광지">
+					<input type="hidden" name="viewStart" value="0">
+					<input type="hidden" name="viewEnd" value="5">
 <!-- 					hidden 태그는 보이지 않지만 파라미터로 넘어간다 -->
 					
 				
@@ -88,27 +90,34 @@
 			int pageNo = pg.getPageNo(); //현재 페이지 번호
 			int pageSize = pg.getPageSize();
 			
+			String word = pg.getWord();
+			
 			String type=dto.getType();
+			
+			int viewStart=pg.getViewStart(); //보여지는 페이지 번호 시작과 끝
+			int viewEnd=pg.getViewEnd();
 		%>	
 		
 		<%if (pageNo==0){ %>
 			<i class="fa fa-angle-left" style="color:#999;"></i>
 		<%}else{ %>	
-			<a href="List.board?pageNo=<%=pageNo-1%>&pageSize=<%=pageSize%>&type=<%=type %>"><i class="fa fa-angle-left"></i></a>
+			<a href="List.board?pageNo=<%=pageNo-1%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><i class="fa fa-angle-left"></i></a>
 		<%} %>
 		
-	<%for(int i=0;i<pageNum ; i++){ %>		
+	<%for(int i=viewStart; i<viewEnd ; i++){ %>		
 		<%if(i==pageNo){ %>  
 <!-- 		현재 페이지 링크 안됨 -->
 			<strong><%=i+1 %></strong>
 		<%}else{ %>
-			<a href="List.board?pageNo=<%=i%>&pageSize=<%=pageSize%>&type=<%=type %>"><%=i+1 %></a>
+			<a href="List.board?pageNo=<%=i%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><%=i+1 %></a>
 		<%} 
 		}%>
+		
+		
 			<%if (pageNo==pageNum-1){ %>
 			<i class="fa fa-angle-right" style="color:#999;"></i>
 		<%}else{ %>	
-			<a href="List.board?pageNo=<%=pageNo+1%>&pageSize=<%=pageSize%>&type=<%=type %>"><i class="fa fa-angle-right"></i></a>
+			<a href="List.board?pageNo=<%=pageNo+1%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><i class="fa fa-angle-right"></i></a>
 		<%} %>
 			<div class="write">
 				<a href="write.jsp">글쓰기</a>
