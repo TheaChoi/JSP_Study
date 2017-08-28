@@ -26,12 +26,29 @@
 </head>
 <body>
 	<header class="header">
-		
+		<a href="#" class="btn_gnb" id="menu-toggle"><i class="fa fa-navicon headericon"></i></a>
 		<h1 class="logo"><span>함안</span>가자</h1>
-
-	
+		<a href="#" class="btn_search"><i class="fa fa-search headericon"></i></a>
+		<div class="bar-search">
+			<form name="mysearch" action="List.board">
+				<div class="inner">
+				
+					<label for="search" class="readonly">검색단어 입력</label>
+					<input type="text" name="search" class="search" id="search" placeholder="찾고 싶은 정보를 검색하세요">
+					<input type="hidden" name="pageNo" value="0">  
+					<input type="hidden" name="pageSize" value="5">
+					<input type="hidden" name="type" value="관광지">
+					<input type="hidden" name="viewStart" value="0">
+					<input type="hidden" name="viewEnd" value="5">
+<!-- 					hidden 태그는 보이지 않지만 파라미터로 넘어간다. form태그는 파라미터로 값이 안넘어감. -->
+					
+				
+				</div>
+				<input type="submit" value="search" name="search" style="width:50px;">
+			</form>
+		</div>
 	</header>
-	
+	<%@ include file="../sidebar-nav.jsp" %>
 	<!-- sub contents start -->
 	<div class="loginbox">
 		<p>
@@ -40,7 +57,7 @@
 			"<span class="p3">함안가자 쿠폰</span>" <br>받아 가세요</span>
 		</p>
 		<h3 class="readonly">관리자로그인</h3>
-		<form name="myform" method="post" action="main.html">
+		<form name="myform" method="post" action="login.admin" onsubmit="logcheck();">
 			<ul class="login pdt20">
 				<li>
 					<label for="idd" class="readonly">아이디 입력</label><input type="text" name="id" placeholder="&#xf2c1;  Id" id="idd" title="아이디를 입력해주세요" style="font-family:Arial,FontAwesome">  
@@ -50,7 +67,7 @@
 				</li>
 			<!--   <lababel for="fff">업로드 파일 선택</label><input type="file" name="upfile" id="fff">  //  <form enctype="multipart/form-data"> -->
 			
-				<li><a onClick="javascript:logcheck();">로그인</a></li>
+				<li><input class="loginBtn" type="submit" value="로그인"></li>
 				<li><a href="../index.html">돌아가기</a></li>
 				<li><a href="member-search.html">아이디/패스워드 찾기</a></li>
 			</ul>

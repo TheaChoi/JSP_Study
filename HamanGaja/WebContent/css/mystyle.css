@@ -65,21 +65,19 @@ strong {font-weight:normal; font-size:14px;}
 .header {backgournd-color:#e4e4e4; border-bottom:1px solid #e1dfdf; position:relative;padding-bottom:16px;} /* �ΰ�� �����ܵ��� ��� �ȿ� ������ �ֱ� ���� ������ ��� ��� */
 .header .btn_gnb {position:absolute; left:15px; top:15px;}
 .header h1.logo {padding-top:19px; text-align:center; font-weight:800; font-size:18px;}   /* position:absolute ���¿����� margin:0 auto �Ǵ� text-align�� ������ �ʴ´�*/
-.header .btn_search {position:absolute; right:15px; top:15px;}
+.header .btn_search {width:20px; height:20px; position:absolute; right:15px; top:15px;}
 .header h1 span {color:#f26522;}
 .header i.headericon {font-size:18px; color:#4a4a4a; }
 .header a {padding:3px;}
 
-
+.searchicon {width:20px; height:20px; position:absolute; right:15px; top:15px;}
 
 /* navi css */
 
 
-#slidebar-wrapper {position:fixed; left:0; top:0; width:252px; height:100%; background-color:#fff; z-index:9999; 
-transform:translateX(-252px); transition:all 0.4s ease 0s;}
+#slidebar-wrapper {position:fixed; left:0; top:0; width:252px; height:100%; background-color:#fff; z-index:9998; transform:translateX(-252px); transition:all 0.4s ease 0s;}
 
-#slidebar-wrapper.active {
-left:250px; width:250px; transition:all 0.4s ease 0s;}
+#slidebar-wrapper.active {left:250px; width:250px; transition:all 0.4s ease 0s;}
 
 .slidebarwrap {padding:30px 0 40px 0; width:252px; height:230px; background-color:#ffc054;}
 .btn-close {color:#fff; font-size:25px; font-weight:700; padding:16px; float:right;}
@@ -88,8 +86,8 @@ left:250px; width:250px; transition:all 0.4s ease 0s;}
 }
 .slidebarwrap p {font-size:13px;padding:15px; text-align:center; color:#fff;}
 .slidebarwrap p span {font-size:15px;font-weight:bold; font-family:Gothic;}
-.sidebar-nav {clear:both;}
-.sidebar-nav li {height:50px; border-bottom:1px solid rgba(210,210,210,.5);}
+.sidebar-nav {clear:both;border-bottom: 1px solid rgba(210,210,210,.);}
+.sidebar-nav li {height:50px;}
 .sidebar-nav li i {width:36px; height:36px; border-radius:100%; border:2px solid #d2d3d3; background-color:#ffc054; text-align:center; line-height:30px; margin:8px 16px;}
 .sidebar-nav li.active i {background-color:#ff7800;}
 .sidebar-nav li.active a {color:#ff7800;}
@@ -103,8 +101,7 @@ i.navicon {color:#d2d3d3; font-size:16px; line-height:15px;}
 
 .main_visual {position:relative; height:198px; width:100%;}
 .main_visual .inner {height:198px;}
-.backgroundimg {background-size:cover; position:absolute; left:0;
-top:0;height:198px; width:100%;}
+.backgroundimg {background-size:cover; position:absolute; left:0;top:0;height:198px; width:100%;}
 #back1 {background:url(../images/main1.jpg) no-repeat center center;}
 #back2 {background:url(../images/main2.jpg) no-repeat center center;}
 #back3 {background:url(../images/main3.jpg) no-repeat center center;}
@@ -204,7 +201,7 @@ p.rec_cont_p {font-size:13px; margin-bottom:20px;}
 .login li:nth-child(4) {background-color:#3b54e8;}
 .login li:nth-child(3), .login li:nth-child(4) {width:48%; float:left; text-align:center; margin-bottom:14px;}
 .login li:nth-child(5) {clear:both; text-align:center; background-color:#ccc;display:block;}
-
+.login li input.loginBtn {background-color:#f26522;padding:13px 0; color:#fff;}
 .login li a {width:100%; padding:15px 0; display:inline-block; color:#fff;} /*inline-block*/
 
 /* join css */
@@ -232,13 +229,26 @@ p.rec_cont_p {font-size:13px; margin-bottom:20px;}
 .list tr:first-child td {border-top:1px solid #d1d1d1;}
 .list td {color:#494949; text-align:center; height:18px; padding:15px 0 13px 0; border-top:1px solid #d1d1d1;}
 .adminbox ul li input[type="file"] {position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; margin-bottom:15px;}
-textarea {resize:none; width:100%; height:200px; border:1px solid #ccc; margin-bottom:16px;}
-.adminbox ul li label.filebox {display:inline-block; padding:12px 20px; color:#999; font-size:16px; line-height:normal; vertical-align:middle; background-color:#fdfdfd;
-cursor:pointer; border:1px solid #ccc; width:100%;}
+textarea {resize:none; width:100%; height:200px; border:1px solid #ccc; margin-bottom:16px;padding:25px; font-size:13px;}
+.adminbox ul li label.filebox {display:inline-block; padding:12px 20px; color:#fff; font-size:16px; line-height:normal; vertical-align:middle; background-color:#bbb;
+cursor:pointer; border:1px solid #ccc; width:100%; width:130px; text-align:center; }
 .admin li input {padding:15px 0px 15px 15px; width:100%; border:1px solid #ddd; font-size:16px; margin-bottom:15px;}
-button.ok {background-color:#f00; padding:10px 18px; border:0 none; color:#fff;}
-button.cancel {background-color:#ccc; padding:10px 18px; border:0 none; color:#fff;}
-.adminbox .admin li:nth-child(4) button {width:100%; clear:both; background:#fcc463; margin-top:15px;}
+button.ok {background-color:#f00; padding:10px 18px; border:0 none; color:#fff;font-size:16px; margin-right:15px;}
+button.cancel {background-color:#00f; padding:10px 18px; border:0 none; color:#fff;font-size:16px;}
+.writebtn {margin:20px auto; text-align:center;}
+#delete {font-size:14px;text-align:right;background-color:#fff;color:#222;border:none; margin-right:10px;}
+#delete:hover {color:#00f;}
+.paging {overflow:hidden;}
+.paging > .write  {background-color: #fcc463;
+    border: 0 none;
+    width: 90px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+     }
+.paging > .write > a {color:#fff;font-size:16px; padding:10px 18px;}
 
 
 /* trip-view css */
@@ -299,31 +309,38 @@ margin: 0 auto;float: left;}
 		
 	}
 	.best_cont ul li:nth-child(2n) {
-		margin-right:0 !important;;
+		margin-right:0 !important;
 	}
 	#slidebar-wrapper {
-		width: 100%; height: 20px; line-height:20px;
+		width: 80%; height: 20px; line-height:20px;
 		background-color:transparent;
-		z-index: 9999; position: relative;
+		z-index: 9998; position: relative;
 		transform: translateX(0px);
 		transition-property:none;
-		position:absolute;
+		position:relative;
 			}
-	.tab_bar {clear:both;}		
+
 	
-	#slidebar-wrapper ul li {float:left; width:16%; text-align:center;height:60px;line-height:40px; padding-bottom:50px;}
+	#slidebar-wrapper ul li {float:left; width:14%; text-align:center;height:60px;line-height:40px; padding-bottom:50px;}
 	#slidebar-wrapper ul li a {color:#4c4c4c;}
 	
 	
-	#slidebar-wrapper >.btn-close, #slidebar-wrapper >.btn-close > i, #slidebar-wrapper .slidebarwrap, #sidebar-wrapper .sidebar-nav i  {display:none;}
+	#slidebar-wrapper >.btn-close, .btn_gnb, #slidebar-wrapper .slidebarwrap, #sidebar-wrapper .sidebar-nav i  {display:none;}
 	
-	.sidebar-nav {padding-top:20px;}
+	.sidebar-nav {padding-top:10px; padding-bottom:60px;border-bottom: 1px solid rgba(210,210,210,.4);}
 	
-	.btn-close, .btn_gnb {display:none;}
+	
 	
 	.sub-title-group, .loginbox {margin-top:70px;}
+	.sub-title-group, .loginbox, .adminbox {margin-top:70px;}
 	
+	.header .btn_search {width:20px; height:20px; position:absolute; right:15px; top:15px; z-index:9999;}
+	
+	.bar-search {}
 }
+
+
+
 @media (min-width:1200px) {
 	
 	body {font-size:20px;}
@@ -331,14 +348,11 @@ margin: 0 auto;float: left;}
 		padding-top: 20%;
 		margin-top: -10px;
 	}
-	 .tab_bar, .sub-title-group h2, .sub-contents, .login, .footer p {
+	.sub-title-group h2, .sub-contents, .login, .footer p {
 		width:1200px;
 		margin:0 auto;
 	}
-	 .tab_bar {
-		 overflow:hidden;
-		 padding:0;
-	 }
+	 
 	 .best_cont li {
 		width: 32.5% !important;
 		margin-right: 1% !important;
@@ -346,8 +360,9 @@ margin: 0 auto;float: left;}
 	.header {width:100%;}
 
 	#slidebar-wrapper {
-		width: 100%;
+		width: 80%;
 		margin:0 auto;
+		position:relative;
 	}
 	.sub-contents ul li img {
 	width:150%;
@@ -368,9 +383,13 @@ margin: 0 auto;float: left;}
 	.rec_cont {
 	margin-top:230px;}
 	
-	.sub-title-group, .loginbox {margin-top:70px;}
+	.sub-title-group, .loginbox, .adminbox {margin-top:70px;}
+	.sidebar-nav {border-bottom: 1px solid rgba(210,210,210,.4);}
+	.btn-close, .btn_gnb {display:none !important;}
 
+	.sidebar-nav {padding-top:10px; padding-bottom:60px; border-bottom: 1px solid rgba(210,210,210,.4);}
 
+	.header .btn_search {width:20px; height:20px; position:absolute; right:15px; top:15px;z-index:9999;}  /*z-index활용 a태그 먹히게 하기!*/
 }
 
 

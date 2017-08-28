@@ -31,7 +31,7 @@
 	<div class="sub-contents">
 		<ul>
 			<li>
-				<a href="trip-view.html">
+				<a href="trip-view.jsp">
 				<div class="sub-table">
 					<div class="sub-table-cell1">
 						<img src="images/trip1.jpg" alt="입곡마을">

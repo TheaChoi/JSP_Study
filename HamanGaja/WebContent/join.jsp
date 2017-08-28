@@ -8,14 +8,22 @@
 	<link href="css/mystyle.css" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<script>
+	<script src="js/chkBrowser.js"></script>  
+<!-- 	브라우저 호환성 -->
 	
-		var isExpOk = false;
+	
+	<script>
+		
+	
+		alert("브라우저 에전트:"+browser);
+	
+		var idExpOk = false;
 		var isIdChecked = false; //중복체크가안되었거나 사용할수없는 아이디임
 		var checkResult = false; //중복체크의 결과
 		var isPwChecked = false;
 		
 		function joincheck() {
+			
 			/*****************
 			if(myform.id.value=="") {
 				alert("아이디를 입력하시오");
@@ -54,8 +62,28 @@
 				alert("중복된 아이디 입니다. 다른 아이디를 입력하세요.");
 				return false;
 			}
-			if(isIdChecked == true && checkResult == true){
+			
+// 			//전화번호입력확인
+// 			var tel2 = document.getElementById("tel2").value;
+// 			var tel3 =document.getElementById("tel3").value;
+			
+// 			var exp2 = /[0-9]{3,4}$/;
+			
+// 			if(exp2.test(tel2) != true){
+// 				alert("두번째 전화번호 입력 형식이 잘못되었습니다. \n3~4자리 숫자로 입력하세요.");
 				
+// 				return;
+// 			}
+			
+// 			var exp3 = /[0-9]{4}$/;
+			
+// 			if(exp3.test(tel3) != true){
+// 				alert("세번째 전화번호 입력 형식이 잘못되었습니다. \n4자리 숫자로 입력하세요.");
+// 				return;
+// 			}
+			
+			if(isIdChecked == true && checkResult == true){
+			
 			myform.submit();
 			}
 		}
@@ -119,13 +147,13 @@
 			{
 				idmsg.style.color="grey";
 				idmsg.innerHTML =  "<font>올바른형식</font>";
-				isExpOk = true;
+				idExpOk = true;
 				return;
 				
 			}else{
 				idmsg.style.color="grey";
 				idmsg.innerHTML =  "<font>아이디를 영문자/숫자를 섞어 5~15자 이내로 입력해주세요</font>";
-				isExpOk = false;
+				idExpOk = false;
 				return;
 			}
 			
@@ -133,14 +161,48 @@
 		}
 		
 		function pwCheck(){  //패스워드 확인 검사
-			var pwmsg = document.getElementById("idMsg");
+			var pwmsg = document.getElementById("pwMsg");
 			var pw1 = document.getElementById("pw1").value;
 			var pw2 = document.getElementById("pw2").value;
 			
-			if(pw1 == pw2){
-				idmsg.style.color="red";
-				idmsg.innerHTML = "<font>중복된 아이디입니다.</font>";
+			if(pw1 != pw2 && pw2 != ""){   //pw2 고친 후에도 작동하도록 pw2!=""(null이 아님)
+				pwmsg.style.color="red";
+				pwmsg.innerHTML = "<font>비밀번호 확인 입력이 일치하지 않습니다</font>";
+			}else{
+				pwmsg.innerHTML = "";   //html이니까 null이 아닌 빈 문자열 입력하기.
 			}
+		}
+		
+		function telCheck(){
+			
+			var tel2 = $("#tel2").val();
+			var tel3 = $("#tel3").val();
+			
+			
+			var exp2 = /^[0-9]+$/;
+			
+			if(exp2.test(tel2) != true && tel2 != ""){  //tel3부터 써도 작동하도록
+
+				
+				$("#tel2").val('');    //정규표현식 안맞으면 input칸을 빈칸으로 만들기(jquery)
+				return;
+			}
+			
+			var exp3 = /^[0-9]+$/;
+			
+			if(exp3.test(tel3) != true){
+
+				$("#tel3").val('');
+				return;
+			}
+		}
+		
+		 //엔터키 안먹게 하는 거
+			function captureReturnKey(e) {  
+			    if(e.keyCode==13){  //event.srcElement.Type != 'textarea'
+
+			    return false;
+			    }
 		}
 		
 	</script>
@@ -170,26 +232,26 @@
 			"<span class="p3">함안가자 쿠폰</span>" <br>받아 가세요</span>
 		</p>
 		<h3 class="readonly">회원가입</h3>
-		<form name="myform" method="post" action="reg.mem">
+		<form name="myform" method="post" action="reg.mem" onsubmit= "joincheck();return false;" >   <!--onsubmit은 input이 아니라 form태그에 써야한다-->
 			<ul class="join pdt20">
 				<li>
 					<label for="idd" class="readonly">아이디 입력</label>
 					<input class="id" type="text" name="id" placeholder="&#xf2c1;  아이디 입력" 
-					id="idd" title="아이디를 입력해주세요" style="font-family:Arial,FontAwesome" onKeyup="idChanged()">  
+					id="idd" title="아이디를 입력해주세요" style="font-family:Arial,FontAwesome" onKeyup="idChanged()" onkeydown="return captureReturnKey(event)">  
 					<a href="#" class="idcheck" onClick="idCheck()">중복확인</a>
 					<span class="idmsg" id="idMsg" ></span>
 				</li><!--label의 for은 라벨을 클릭했을때 이동하고자 하는 위치(input의 id). input의 name은 기억장소의 이름-->
 				<li>
 					<label for="pww" class="readonly">패스워드 입력</label>
-					<input type="password" name="pw1" placeholder="&#xf084;  패스워드 입력" 
+					<input type="password" name="pw1" placeholder="&#xf084;  패스워드 입력" onKeyup="pwCheck()"  onkeydown="return captureReturnKey(event)"
 					id="pw1" title="비밀번호를 입력해주세요" style="font-family:Arial,FontAwesome">
 				</li>
 			<!--   <label for="fff">업로드 파일 선택</label><input type="file" name="upfile" id="fff">  //  <form enctype="multipart/form-data"> -->
 				<li>
 					<label for="pww2" class="readonly">패스워드 확인</label>
-					<input type="password" name="pw2" placeholder="&#xf084;  패스워드 확인" 
+					<input type="password" name="pw2" placeholder="&#xf084;  패스워드 확인" onKeyup="pwCheck()"  onkeydown="return captureReturnKey(event)"
 					id="pw2" title="패스워드 확인을 입력해주세요" style="font-family:Arial,FontAwesome">
-					<span class="pwmsg" id="pwMsg" ></span>
+					<span class="pwmsg" id="pwMsg"></span>
 				</li>
 				<li>
 					<label for="tel1" class="readonly">전화번호 입력</label>
@@ -198,12 +260,12 @@
 						<option value="011">011</option>
 						<option value="017">017</option>
 					</select>
-					<input type="text" name="tel2" class="tel2">
-					<input type="text" name="tel3" class="tel3">
+					<input type="text" id="tel2" name="tel2" class="tel2" maxlength="4" onKeyup="telCheck()" onkeydown="return captureReturnKey(event)">
+					<input type="text" id="tel3" name="tel3" class="tel3" maxlength="4" onKeyup="telCheck()" onkeydown="return captureReturnKey(event)">
 				</li>
 				<li>
 					<label for="email" class="readonly">메일주소입력</label>
-					<input type="text" name="emailid" class="emailid" id="email" required>
+					<input type="text" name="emailid" class="emailid" id="email" required onkeydown="return captureReturnKey(event)">
 					<select name="emailser">
 						<option value="">메일선택</option>
 						<option value="naver.com">naver.com</option>
@@ -212,9 +274,9 @@
 					</select>
 				</li>
 				<li>
-					<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:70%;">
+					<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:70%;" disabled="disabled">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width:27%;"><br>
-					<input type="text" id="sample6_address" name="address1" placeholder="주소">
+					<input type="text" id="sample6_address" name="address1" placeholder="주소" disabled="disabled">
 					<input type="text" id="sample6_address2" name="address2" placeholder="상세주소">
 					
 					<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -262,7 +324,7 @@
 					    }
 					</script>
 				</li>
-				<li><input type="submit" onsubmit="joincheck(); return false" value="가입을 완료합니다" class="ok"></li>
+				<li><input type="submit" value="가입을 완료합니다" class="ok"></li>
 				<li class="cancel"><a href="login.html">취소</a></li>
 				
 			</ul>
@@ -293,7 +355,30 @@
 </html>
 
 
+<!-- 
+1. 한영전환 
+------------------------------------------------------------------------- 
+ 주변의 모든 폼요소를 한글로 초기화 -
+ⓐ <input type="text" style="ime-mode:active" /> 
+(당연히 영어로 전환이 가능하다.)
 
+ 한글모드에서 다시 영문모드로 복뒤, 이후의 요소를 모두 영문으로 복귀시킴
+ⓑ <input type="text" style="ime-mode:inactive" /> 
+<input type="text" />  영문으로 입력됨
+
+한글문자 입력 금지 (원천봉쇄): 아예 한/영 키를 눌러도 한글이 입력되지 않는다. 
+ⓒ <input type="text" style="ime-mode:disabled" /> 
+
+
+2. 영문자의 대소문자 
+------------------------------------------------------------------------ 
+마찬가지로 id 등의 요소에는 영문자만 입력되게 할 수 있는데, Javascript를 이용한 방법보다 훨씬 쉽고, 직관적이다. 
+
+<p style="text-transform: capitalize">첫번째 영문자만 대문자 : This site is motifdn</p> 
+<p style="text-transform: uppercase">모두 대문자 : This sitem is motifdn</p> 
+<p style="text-transform: lowercase">모두 소문자 : This site is motifdn</p> 
+
+ -->
 
 
 

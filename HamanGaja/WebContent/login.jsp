@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/mystyle.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
+	
 	<script>
 		function logcheck() {
 			if(myform.id.value=="") {
@@ -26,7 +27,7 @@
 			}
 			
 			
-		}u
+		}
 	</script>
 </head>
 <body>
@@ -72,7 +73,7 @@
 			</ul>
 		</form>
 		
-	</div.0>
+	</div>
 	<!-- sub contents end -->
 	
 	<footer class="footer">

@@ -18,7 +18,7 @@
 			<div class="inner">
 				<form name="mysearch">
 					<label for="search" class="readonly">검색단어 입력</label>
-					<input type="text" name="search" class="search" id="search" value="찾고 싶은 정보를 검색하세요">
+					<input type="text" name="search" class="search" id="search" placeholder="찾고 싶은 정보를 검색하세요">
 				</form>
 			</div>
 		</div>
@@ -28,7 +28,8 @@
 	
 	<section class="main_visual">	
 		<header>
-			<h2 class="readonly">main visual</h2>
+			<h2 class="readonly">mai
+			n visual</h2>
 		</header>
 		<div class="inner">
 			<div class="backgroundchange">
@@ -54,7 +55,7 @@
 
 한편 올해는 보다 풍성한 축제를 마련하기 위해 축제입장권을 발행한다.
 			</p>
-			<p class="more"><a href="trip-view2.html">더보기 <i class="fa fa-arrow-right moreicon"></i></a></p>
+			<p class="more"><a href="trip-view2.jsp">더보기 <i class="fa fa-arrow-right moreicon"></i></a></p>
 		</div>
 	</section>
 	<section class="best_cont">
@@ -79,6 +80,7 @@
 	</section>
 	<footer class="footer">
 		<p>COPYRIGHT HAMANGAJA RIGHTS RESERVED</p>
+		
 	</footer>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

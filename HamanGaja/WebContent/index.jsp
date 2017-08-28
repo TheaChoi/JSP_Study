@@ -22,7 +22,7 @@
 <!--	<script>
 	
 		$(document).ready(function() {
-			location.href="main.html";
+			location.href="main.jsp";
 		});
 
 	</script>

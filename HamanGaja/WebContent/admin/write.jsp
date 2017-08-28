@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file ="admin-check.jsp" %>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -8,6 +10,43 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="../css/mystyle.css" rel="stylesheet">
 	<link href="../css/font-awesome.min.css" rel="stylesheet">
+	
+	<script>
+		function check() {
+			if(myform.title.value==""){
+				alert("제목을 입력하세요");
+				return;
+			}
+			if(myform.content.value.trim()==""){  //빈공간 검사할땐 trim()으로 양옆의 빈공간을 없애줘야한다
+				alert("글내용 입력하세요");
+				return;
+			}
+			myform.submit();
+		}
+		
+		function fileupload(){
+			var pic = document.getElementById("pic");
+			var filename = document.getElementById("filename");
+			filename.innerHTML = pic.value;
+			
+			var div = document.getElementById("filediv");
+			div.style.display="inline-block";
+		}
+		
+		function filedelete() {
+			var filename = document.getElementById("filename");
+			filename.innerHTML="";
+			
+// 			file input 태그 초기화
+			var pic = document.getElementById("pic");
+			pic.type="";
+			pic.type="file";
+			
+			var div = document.getElementById("filediv");
+			
+			div.style.display="none";
+		}
+	</script>
 </head>
 <body>
 	<header class="header">
@@ -26,23 +65,38 @@
 	<%@ include file="../sidebar-nav.jsp" %>
 	<!-- sub contents start -->
 	<div class="adminbox">
-		<h2 class="readonly">관광지 글쓰기</h2>
-		<form name="myform" method="post" action="member.html">
+		<h2 class="readonly">글쓰기</h2>
+		
+		<form name="myform" method="post" enctype="multipart/form-data" action="write.board">  
+			<select name="type">
+				<option value="관광지">관광지 글쓰기</option>
+				<option value="맛집">맛집 글쓰기</option>
+				<option value="특산물">특산물 글쓰기</option>
+			</select>
+	<!-- 		enctype="multipart/form-data" 인코딩타입 정해줘야 파일업로드 가능 -->
+<!-- 		"multipart request" 쓰려면 C:\Program Files\Apache Software Foundation\Tomcat 9.0\lib\cos.jar 있어야 업로드 기능 쓸 수 있다 -->
+		
 				<ul class="admin pdt20">
 					<li>
-						<label for="idd" class="readonly">여행지 입력</label>
-						<input type="text" name="id" placeholder="여행지 입력" id="idd" title="여행할 장소의 이름을 입력해주세요" style="font-family:Arial,FontAwesome">  
+						<label for="title" class="readonly">제목 입력</label>
+						<input type="text" name="title" placeholder="제목 입력" id="title" title="제목을 입력해주세요" style="font-family:Arial,FontAwesome">  
 					</li>
 					<li>
-						<label for="idd" class="readonly">여행지 소개 입력</label>
-						<textarea name="content" style="width:100%; height:200px;">
-						</textarea>
+						<label for="content" class="readonly" >내용 입력</label>
+						<textarea name="content" style="width:100%; height:200px;" placeholder="내용을 이곳에 작성하세요."></textarea>
 					</li>
-					<li>
-						<label for="pic" class="filebox">사진업로드파일</label>
-						<input type="file" name="pic" id="pic">
-					</li>
-					<li>
+					 <li>
+ 						<label for="pic" class="filebox">파일 업로드</label>  
+						<input type="file" name="pic" id="pic" onChange="fileupload()">
+						<span id="filename"></span>
+						<div id="filediv" style="display:none;">
+							
+							<input type="button" value="삭제" onClick="filedelete()" id="delete">
+						</div> 
+ 					</li>
+						
+					<li class="writebtn">
+						
 						<button type="button" onClick="javascript:check();" class="ok">확인</button>
 						<button type="button" onClick="javascript:history.back();" class="cancel">취소</button>
 					</li>
