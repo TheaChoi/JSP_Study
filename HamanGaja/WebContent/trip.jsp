@@ -25,6 +25,7 @@
 	</header>
 	<%@ include file="sidebar-nav.jsp" %>
 	<!-- sub contents start -->
+	
 	<div class="sub-title-group">
 		<h2 class="sub-title1">함안가자 여행지</h2>
 	</div>

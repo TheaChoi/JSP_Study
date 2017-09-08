@@ -8,12 +8,12 @@
 </head>
 <body>
 
-<%@ include file = "main.jsp" %>  
+<%-- <%@ include file = "main.jsp" %>   --%>
 
 <script>
 	function myAlert(){
 		alert("로그아웃되었습니다.");
-		//location.href="login.jsp";
+		location.href="main.user";
 	}
 	
 	setTimeout("myAlert()", 100);

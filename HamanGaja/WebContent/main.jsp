@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dto.ListMainDTOOut"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -23,7 +25,10 @@
 			</div>
 		</div>
 	</header>
-
+<%
+	ArrayList<ListMainDTOOut> list = (ArrayList<ListMainDTOOut>) request.getAttribute("LISTMAINDTO");
+	
+%>
 	<%@ include file="sidebar-nav.jsp" %>
 	
 	<section class="main_visual">	
@@ -61,10 +66,27 @@
 	<section class="best_cont">
 		<h2>Best 여행지</h2>
 		<ul>
-			<li><a href="#"><img src="images/h1.jpg" alt="강주마을" class="imgw50" ><span>강주마을</span><p>해바라기와 벽화가 아름다운 함안의 대표적 고장. 함안은 전국 최대의 수박 주산지로 우선 수박과 관련된 가공식품인 엿, 주스, 잼, 조청 등 관광상품 개발에 좋은 여건을 갖추고 있지만 변화에 미온적이라는 게 대체적인 평가다.</p></a></li>  <!--class="imgw100"-->
-			<li><a href="#"><img src="images/h2.jpg" alt="입곡다리" class="imgw50"><span>입곡다리</span><p>유서깊은 입곡 저수지을 가로지르는 입곡 다리. 볼거리의 하나로 일선 학교에 흩어져 있는 조류, 동물 박제품과 천연기념물 큰소쩍새 ,독수리, 원앙, 황조롱이, 수리부엉이 등이 있다.</p></a></li>
-			<li><a href="#"><img src="images/h3.jpg" alt="악양루꽃길" class="imgw50"><span>악양루 꽃길</span><p>아름다운 꽃양귀비와 들꽃이 지천으로 피어있는 악양루 꽃길. 이와 더불어 함안에서 서식하는 나비, 벌 등 각종 곤충을 한곳에 모아 관람할 수 있다</p></a></li>
-			<li><a href="#"><img src="images/h4.jpg" alt="악양저수지"class="imgw50"><span>악양 저수지</span><p>악양루의 자랑 아름다운 숲과 강이 어우러진 함안의 저수지. 함안을 방문하는 바이어와 고객들이 관광지를 돌아보고 지역을 자랑할 수 있는 특색 있는 볼거리와 더불어 음식명소를 개발하고 있다</p></a></li>
+		<%
+		
+			for(int i=0; i<list.size(); i++){
+				int num = list.get(i).getNum();
+				String title = list.get(i).getTitle();
+				String photo = list.get(i).getPhoto();
+				String content = list.get(i).getContent();
+				if(photo==null){
+					photo="image/default.png";
+				}else{
+					photo="upload/"+photo;
+				}
+			%>
+			
+				<li><a href="#"><img src="<%=photo%>" alt="<%=title %>" class="imgw50" >
+				<span><%=title %></span><p><%=content %></p></a></li>  <!--class="imgw100"-->
+				
+			<%
+			}
+		
+		%>
 		</ul>
 	</section>
 	<section class="tab_bar">
