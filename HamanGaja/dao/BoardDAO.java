@@ -262,5 +262,46 @@ public boolean mod2(BoardDTOIn dto, int num) throws SQLException{  //사진미포함�
 		
 		pstm.executeUpdate();
 	}
+	
+	public boolean modPhoto(int num, String photo) throws SQLException{
+		Connection con = DBCP.getConnection();		
+		String sql = "update board set photo=? where num=?";
+		PreparedStatement pstm = con.prepareStatement(sql);
+		pstm.setString(1, photo);
+		pstm.setInt(2, num);
+		
+		pstm.executeUpdate();
+		
+		
+		int ret = pstm.executeUpdate();
+		if(ret==1){
+			pstm.close();
+			con.close();
+			return true;
+		}else{
+			pstm.close();
+			con.close();
+			return false;
+		}
+	}
+	
+	public boolean modMap(int num, String map) throws SQLException{
+		Connection con = DBCP.getConnection();		
+		String sql = "update board set map=? where num=?";
+		PreparedStatement pstm = con.prepareStatement(sql);
+		pstm.setString(1, map);
+		pstm.setInt(2, num);
+		
+		int ret = pstm.executeUpdate();
+		if(ret==1){
+			pstm.close();
+			con.close();
+			return true;
+		}else{
+			pstm.close();
+			con.close();
+			return false;
+		}
+	}
 
 }
