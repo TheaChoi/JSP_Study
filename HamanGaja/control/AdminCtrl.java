@@ -51,7 +51,7 @@ public class AdminCtrl extends HttpServlet {
 		//	String encText = URLEncoder.encode(type, "UTF-8") ;
 
 		//	response.sendRedirect("List.board?pageNo=0&pageSize=5&type="+encText);
-			response.sendRedirect("/HamanGaja/main.jsp");
+			response.sendRedirect("/HamanGaja/main.user");
 		}else{
 			System.out.println("관리자 로그인 안됨");
 		}

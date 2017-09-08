@@ -119,6 +119,8 @@ public class BoardCtrl extends HttpServlet {
     	ArrayList<ListDTOOut> list = dao.listAll(dto, type);
     	
     	//////////////////////////////////////////////////////////////
+    	
+    	
     	int total   = dao.countAll(type, dto);  
         
         System.out.println("total : " + total);
@@ -258,6 +260,7 @@ public class BoardCtrl extends HttpServlet {
     	String filename = mr.getFilesystemName("pic"); //저장파일이름
     	System.out.println("사진바뀜여부:"+fc+"  /  "+prevPhoto);
     	
+    	//나주에 글목록을 만드는 정보
     	int pageNo = Integer.parseInt(mr.getParameter("pageNo"));   //multipartRequest는 request.getParameter 로 가져올수 없다
         int pageSize = Integer.parseInt(mr.getParameter("pageSize"));
         int viewStart =  Integer.parseInt(mr.getParameter("viewStart"));
@@ -304,6 +307,43 @@ public class BoardCtrl extends HttpServlet {
     	PrintWriter out = response.getWriter();
     
     }
+
+    public void modMap(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
+    	int num = Integer.parseInt(request.getParameter("num"));
+    	String map = request.getParameter("map");
+    	PrintWriter out = response.getWriter();
+    	if(dao.modMap(num, map)==true){
+    		out.print("{\"ret\":true}");
+    	}else{
+    		out.print("{\"ret\":false}");
+    	}
+    }
+    
+    public void modPhoto(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
+    	String path=request.getSession().getServletContext().getRealPath("/")+"/upload";
+    	//파일 저장 장소
+    	int size=1024*1024*100;//파일크기 100메가
+    	String encType="UTF-8";
+    	
+    	MultipartRequest mr = new MultipartRequest(request, path, size, encType,new DefaultFileRenamePolicy());//이름중복방지
+    	
+    	//기타입력정보
+    	int num = Integer.parseInt(mr.getParameter("num"));    //getParameter("modNum")이면 read()에 forward로 넘길떄 곤란하다
+    	String photo = mr.getFilesystemName("pic");
+    	System.out.println(photo);
+    	
+    	PrintWriter out = response.getWriter();
+    	
+    	if(dao.modPhoto(num, photo)==true){
+    		String jsonMsg ="{\"ret\":true,\"pic\":\""+photo+"\"}";  //json여러개보내기
+    		System.out.println("jason:"+jsonMsg);
+    		out.print(jsonMsg);
+    	
+    	}else{
+    		out.print("{\"ret\":false}");
+    		
+    	}
+    }
     
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -327,6 +367,10 @@ public class BoardCtrl extends HttpServlet {
 				mod(request, response);
 			}else if(cmd.equals("delPhoto.board")==true){
 				delPhoto(request, response);
+			}else if(cmd.equals("modMap.board")==true){
+				modMap(request, response);
+			}else if(cmd.equals("modPhoto.board")==true){
+				modPhoto(request, response);
 			}
 		}
 			catch(SQLException e){

@@ -82,7 +82,7 @@ public class MemberCtrl extends HttpServlet {
     		session.setAttribute("USERID", id);
     		session.setAttribute("USERPW", pw);
     		//2.페이지 이동
-    		sendRedirect(response, "main.jsp");
+    		sendRedirect(response, "main.user");
     		
     	};
     	
@@ -99,7 +99,7 @@ public class MemberCtrl extends HttpServlet {
 	    	session.setAttribute("USERID", id);
 	    	session.setAttribute("USERPW", pw);
 	    
-	    	sendRedirect(response, "main.jsp");
+	    	sendRedirect(response, "main.user");
     	}else{
     		sendRedirect(response, "loginFail.jsp");
     	}
