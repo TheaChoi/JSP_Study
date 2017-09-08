@@ -23,6 +23,10 @@
 			myform.submit();
 		}
 	</script>
+	<%
+		String realpath = request.getRealPath("");
+		System.out.println("톰캣이 실제 사용하는 경로:"+realpath);
+	%>
 </head>
 <body>
 	<header class="header">

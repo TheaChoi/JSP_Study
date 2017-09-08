@@ -35,7 +35,7 @@
 		
 		function filedelete() {
 			var filename = document.getElementById("filename");
-			filename.innerHTML="";
+			//filename.innerHTML="";
 			
 // 			file input 태그 초기화
 			var pic = document.getElementById("pic");

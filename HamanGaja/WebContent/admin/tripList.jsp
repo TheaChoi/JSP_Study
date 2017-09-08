@@ -45,6 +45,10 @@
 		
 		PageDTOOut pg = (PageDTOOut) request.getAttribute("PAGEOUT");
 	%>
+			
+		
+	
+		
 	<!-- sub contents start -->
 	<div class="adminbox">
 	<h1 style="font-size:20px; color:#f26522; padding:10px; font-weight:bold;">관광지 목록</h1>
@@ -63,7 +67,7 @@
 				<th scope="col">조회수</th>
 			</thead>
 			<tbody>
-		<% ListDTOOut dto=null;
+			<% ListDTOOut dto=null;
 		
 			for(int i=0; i<list.size() ; i++){
 			dto = list.get(i);
@@ -71,15 +75,30 @@
 			String title = dto.getTitle();
 			String reg_date = dto.getReg_date().substring(0,10);
 			int count = dto.getCount();
-			dto.getType();
+			String type = dto.getType();
 		%>
+	
+		
+		<%
+			int pageNum = pg.getPageNum(); //전체 페이지 개수
+			int pageNo = pg.getPageNo(); //현재 페이지 번호
+			int pageSize = pg.getPageSize();
+			
+			String word = pg.getWord();
+			
+			
+			int viewStart=pg.getViewStart(); //보여지는 페이지 번호 시작과 끝
+			int viewEnd=pg.getViewEnd();
+		%>	
+		
 				<tr>
 					<td><%=num %></td>
-					<td><%=title %></td>
+					<td><a href="read.board?num=<%=num%>&pageNo=<%=pageNo%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><%=title %></a></td>
 					<td><%=reg_date %></td>
 					<td><%=count %></td>
 				</tr>
 		<%} %>
+		
 			</tbody>
 		</table>
 		
@@ -97,6 +116,7 @@
 			int viewStart=pg.getViewStart(); //보여지는 페이지 번호 시작과 끝
 			int viewEnd=pg.getViewEnd();
 		%>	
+		
 		
 		<%if (pageNo==0){ %>
 			<i class="fa fa-angle-left" style="color:#999;"></i>
