@@ -61,20 +61,11 @@ public class MemberCtrl extends HttpServlet {
     	String email = request.getParameter("emailid")+"@"+request.getParameter("emailser");
     	String address = request.getParameter("address1")+" "+request.getParameter("address2");
     	
-//    	System.out.println(id);
-//    	System.out.println(pw1);
-//    	System.out.println(tel1);
-//    	System.out.println(tel2);
-//    	System.out.println(tel3);
-//    	System.out.println(emailid);
-//    	System.out.println(emailser);
-//    	System.out.println(address1);
-//    	System.out.println(address2);
-//    	
+ 	
     	MemDTOIn dto = new MemDTOIn(id, pw, phone, email, address);
     	//dto를 dao에 전달해서 데이터베이스에 정보를 저장함
     	if(dao.reg(dto)==true){
-    		//로그인페이지로이동할 경우
+    		//로그인 페이지로 이동할 경우
     		//sendRedirect(response, "login.jsp");
     		
     		//1. 로그인 상태로 만든다.
@@ -82,7 +73,7 @@ public class MemberCtrl extends HttpServlet {
     		session.setAttribute("USERID", id);
     		session.setAttribute("USERPW", pw);
     		//2.페이지 이동
-    		sendRedirect(response, "main.jsp");
+    		sendRedirect(response, "main.user");
     		
     	};
     	
@@ -99,7 +90,7 @@ public class MemberCtrl extends HttpServlet {
 	    	session.setAttribute("USERID", id);
 	    	session.setAttribute("USERPW", pw);
 	    
-	    	sendRedirect(response, "main.jsp");
+	    	sendRedirect(response, "main.user");
     	}else{
     		sendRedirect(response, "loginFail.jsp");
     	}
