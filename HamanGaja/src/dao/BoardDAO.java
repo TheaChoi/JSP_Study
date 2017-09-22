@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import dto.BoardDTOIn;
+import dto.BoardDTOOut;
+import dto.BoardModDTOOut;
 import dto.ListDTOOut;
 import dto.pageDTOIn;
 
@@ -29,6 +31,7 @@ public class BoardDAO {
 		pstm.setString(5, map);
 		
 		int ret = pstm.executeUpdate();
+		
 		pstm.close();
 		con.close();
 		if(ret==1){
@@ -38,6 +41,37 @@ public class BoardDAO {
 			return false;
 		}
 	}
+	
+	public BoardDTOOut read(int num) throws SQLException
+	   {
+		BoardDTOOut dto=null;
+	      Connection con = DBCP.getConnection();
+	      String sql = "select * from board where num=?";
+	      PreparedStatement pstm = con.prepareStatement(sql);
+	      pstm.setInt(1, num);
+	      
+	      ResultSet rs = pstm.executeQuery();
+	      
+	      if(rs.next()==true)
+	      {
+	         String type=rs.getString("type");
+	         String title = rs.getString("title");
+	         String content = rs.getString("content");
+	         String photo = rs.getString("photo");
+	         String map = rs.getString("map");
+	         int nice = rs.getInt("nice");
+	         int count = rs.getInt("count");
+	         String reg_date = rs.getString("reg_date");
+	         
+	         dto = new BoardDTOOut(num,nice, count, type, title, content, photo, map, reg_date);
+	        
+	      }
+	      rs.close();
+	      pstm.close();
+	      con.close();
+	      return dto;
+	      
+	   }
 	
 	
 	public ArrayList<ListDTOOut> listAll(pageDTOIn page, String type) throws SQLException {
@@ -124,6 +158,150 @@ public class BoardDAO {
 		
 	}
 	
+	public boolean delete(int num) throws SQLException{
+		
+		Connection con = DBCP.getConnection();		
+		String sql = "delete from board where num=?";		
+		PreparedStatement pstm = con.prepareStatement(sql);
+		
+		pstm.setInt(1, num);
+		
+		int ret = pstm.executeUpdate();
+		
+		if(ret==1){
+			pstm.close();
+			con.close();
+			return true;
+		}else{
+			pstm.close();
+			con.close();
+			return false;
+		}
+	}
 	
+	public BoardModDTOOut contents(int num) throws SQLException{
+		
+		Connection con = DBCP.getConnection();		
+		String sql = "select * from board where num=?";
+		PreparedStatement pstm = con.prepareStatement(sql);
+		pstm.setInt(1, num);
+		ResultSet rs = pstm.executeQuery();
+		
+		if(rs.next()==true){
+			String type = rs.getString("type");
+			String title = rs.getString("title");
+			String content = rs.getString("content");
+			String photo = rs.getString("photo");
+			String map = rs.getString("map");
+			
+			BoardModDTOOut dto = new BoardModDTOOut(type, title, content, photo, map);
+			
+			rs.close();
+	         pstm.close();
+	         con.close();
+	         return dto;
+		}return null;
+		
+		
+	}
+	
+	public boolean mod(BoardDTOIn dto, int num) throws SQLException{
+		
+		Connection con = DBCP.getConnection();		
+		String sql = "update board set type=?, title=?, content=?, photo=?, reg_date=now() where num=?";
+		PreparedStatement pstm = con.prepareStatement(sql);
+		pstm.setString(1, dto.getType());
+		pstm.setString(2, dto.getTitle());
+		pstm.setString(3, dto.getContent());
+		pstm.setString(4, dto.getPhoto());
+		pstm.setInt(5, num);
+		
+		int ret = pstm.executeUpdate();
+		
+		if(ret==1){
+			pstm.close();
+			con.close();
+			return true;
+		}else{
+			pstm.close();
+			con.close();
+			return false;
+		}
+	}
+	
+public boolean mod2(BoardDTOIn dto, int num) throws SQLException{  //사진미포함수정
+		
+		Connection con = DBCP.getConnection();		
+		String sql = "update board set type=?, title=?, content=?, reg_date=now() where num=?";
+		PreparedStatement pstm = con.prepareStatement(sql);
+		pstm.setString(1, dto.getType());
+		pstm.setString(2, dto.getTitle());
+		pstm.setString(3, dto.getContent());
+		
+		pstm.setInt(4, num);
+		
+		int ret = pstm.executeUpdate();
+		
+		if(ret==1){
+			pstm.close();
+			con.close();
+			return true;
+		}else{
+			pstm.close();
+			con.close();
+			return false;
+		}
+	}
+	
+	public void delPhoto(int num) throws SQLException{
+		
+		Connection con = DBCP.getConnection();		
+		String sql ="update board set photo=null where num=?";
+		PreparedStatement pstm = con.prepareStatement(sql);
+		pstm.setInt(1, num);
+		
+		pstm.executeUpdate();
+	}
+	
+	public boolean modPhoto(int num, String photo) throws SQLException{
+		Connection con = DBCP.getConnection();		
+		String sql = "update board set photo=? where num=?";
+		PreparedStatement pstm = con.prepareStatement(sql);
+		pstm.setString(1, photo);
+		pstm.setInt(2, num);
+		
+		pstm.executeUpdate();
+		
+		
+		int ret = pstm.executeUpdate();
+		if(ret==1){
+			pstm.close();
+			con.close();
+			return true;
+		}else{
+			pstm.close();
+			con.close();
+			return false;
+		}
+	}
+	
+	public boolean modMap(int num, String map) throws SQLException{
+		Connection con = DBCP.getConnection();		
+		String sql = "update board set map=? where num=?";
+		PreparedStatement pstm = con.prepareStatement(sql);
+		pstm.setString(1, map);
+		pstm.setInt(2, num);
+		
+		int ret = pstm.executeUpdate();
+		if(ret==1){
+			pstm.close();
+			con.close();
+			return true;
+		}else{
+			pstm.close();
+			con.close();
+			return false;
+		}
+	}
 
 }
