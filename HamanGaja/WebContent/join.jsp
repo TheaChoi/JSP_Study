@@ -15,7 +15,7 @@
 	<script>
 		
 	
-		alert("브라우저 에전트:"+browser);
+		//alert("브라우저 에전트:"+browser);
 	
 		var idExpOk = false;
 		var isIdChecked = false; //중복체크가안되었거나 사용할수없는 아이디임

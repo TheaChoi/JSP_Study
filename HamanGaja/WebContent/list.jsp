@@ -18,12 +18,22 @@
 		<h1 class="logo"><span>함안</span>가자</h1>
 		<a href="#" class="btn_search"><i class="fa fa-search headericon"></i></a>
 		<div class="bar-search">
-			<div class="inner">
-				<form name="mysearch">
+			<form name="mysearch" action="list.user">
+				<div class="inner">
+				
 					<label for="search" class="readonly">검색단어 입력</label>
-					<input type="text" name="search" class="search" id="search" value="찾고 싶은 정보를 검색하세요">
-				</form>
-			</div>
+					<input type="text" name="search" class="search" id="search" placeholder="찾고 싶은 정보를 검색하세요">
+					<input type="hidden" name="pageNo" value="0">  
+					<input type="hidden" name="pageSize" value="5">
+					<input type="hidden" name="type" value="관광지">
+					<input type="hidden" name="viewStart" value="0">
+					<input type="hidden" name="viewEnd" value="5">
+<!-- 					hidden 태그는 보이지 않지만 파라미터로 넘어간다 -->
+					
+				
+				</div>
+				<input type="submit" value="search" name="search" style="width:50px;">
+			</form>
 		</div>
 	</header>
 	<%@ include file="sidebar-nav.jsp" %>
@@ -31,7 +41,8 @@
 	<%
 	PageDTOOut pg =(PageDTOOut) request.getAttribute("PAGEOUT");
 	ArrayList<UserDTOOut> list = (ArrayList<UserDTOOut>) request.getAttribute("LIST");
-						
+							
+	System.out.println("list에 들어옴!");
 	String type = list.get(0).getType();
 	%>
 	<%
@@ -124,27 +135,33 @@
 		</ul>
 		<div class="paging">
 			
-		<%if (pageNo==0){ %>
+		<%if (pageNo==0){ %>  <!--현재 페이지가 첫 페이지 일 때 좌측이동 불가-->
 			<i class="fa fa-angle-left" style="color:#999;"></i>
-		<%}else{ %>	
-			<a href="list.user?pageNo=<%=pageNo-1%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><i class="fa fa-angle-left"></i></a>
+		<%}else{ %>	          <!--좌측 이동-->
+			<a href="list.user?pageNo=<%=pageNo-1%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>
+			&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><i class="fa fa-angle-left"></i></a>
 		<%} %>
 		
-	<%for(int i=viewStart; i<viewEnd ; i++){ %>		
-		<%if(i==pageNo){ %>  
-<!-- 		현재 페이지 링크 안됨 -->
-			<strong><%=i+1 %></strong>
-		<%}else{ %>
-			<a href="list.user?pageNo=<%=i%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><%=i+1 %></a>
-		<%} 
-		}%>
 		
 		
-			<%if (pageNo==pageNum-1){ %>
+	    <%for(int i=viewStart; i<viewEnd ; i++){ %>		
+			<%if(i==pageNo){ %>    <!--현재 페이지는 a 태그 비활성화-->
+				<strong><%=i+1 %></strong>
+			<%}else{ %>            <!--현재 페이지 번호 클릭 -> 해당 페이지로 이동-->
+				<a href="list.user?pageNo=<%=i%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>
+				&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><%=i+1 %></a>
+			<%} 
+			}%>		
+			
+			
+		<%if (pageNo==pageNum-1){ %>   <!--  현재 페이지가 마지막 페이지 일 때 우측이동 불가-->
 			<i class="fa fa-angle-right" style="color:#999;"></i>
-		<%}else{ %>	
-			<a href="list.user?pageNo=<%=pageNo+1%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><i class="fa fa-angle-right"></i></a>
+		<%}else{ %>	                      <!--우측 이동-->
+			<a href="list.user?pageNo=<%=pageNo+1%>&pageSize=<%=pageSize%>&type=<%=type %>&search=<%=word%>
+			&viewStart=<%=viewStart%>&viewEnd=<%=viewEnd%>"><i class="fa fa-angle-right"></i></a>
 		<%} %>
+		
+		
 			<div class="top">
 				<a href="#top"><i class="fa fa-chevron-up"></i><br>맨 위로</a>
 			</div>

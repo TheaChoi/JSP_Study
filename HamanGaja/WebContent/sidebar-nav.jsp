@@ -30,7 +30,7 @@
 			<div class="slidebar-brand" style="background:url(/HamanGaja/images/prof.jpg) no-repeat center center;
 			background-size:cover;">
 			</div>
-			<p><span><%=USERID%> </span> 님, 함안가자에 로그인되었습니다</p>
+			<p><span><%=USERID%> </span> 님, 환영합니다!</p>
 		</div>
 		<ul class="sidebar-nav">
 			<li id="main"><i class="fa fa-home navicon"></i><a href="/HamanGaja/main.user">HOME</a></li>
@@ -51,7 +51,7 @@
 			<div class="slidebar-brand" style="background:url(/HamanGaja/images/prof.jpg) no-repeat center center;
 			background-size:cover;">
 			</div>
-			<p><span><%=USERID%> </span> 님, 함안가자에 로그인되었습니다</p>
+			<p><span><%=USERID%> </span> 님, 로그인되었습니다</p>
 		</div>
 		<ul class="sidebar-nav">
 			<li id="main"><i class="fa fa-home navicon"></i><a href="main.user">HOME</a></li>
@@ -61,6 +61,9 @@
 			<li><i class="fa fa-user-o navicon"></i><a href="info.mem">회원정보수정</a></li>
 			<li><i class="fa fa-user-o navicon"></i><a href="logout.mem">로그아웃</a></li>
 			<li><i class="fa fa-user-o navicon"></i><a href="del.jsp">회원탈퇴</a></li>
+<!-- 			<li><i class="fa fa-user-o navicon"></i><a href="makeCookie.user">쿠키만들기</a></li>	 -->
+<!-- 			<li><i class="fa fa-user-o navicon"></i><a href="del.jsp">쿠키삭제</a></li> -->
+			
 		</ul>
 	</nav>
 	<%

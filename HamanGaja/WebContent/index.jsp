@@ -12,16 +12,20 @@
 	<div class="load_bg">
 		<h1>HAMAN GAJA</h1>
 		<div class="load-box">
+		
 			<div class="load">
 				
 			</div>
 		</div>
+	
 	</div>
+	
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- 	<script> -->
-	
+	     
 // 		$(document).ready(function() {
+
 // 			location.href="main.jsp";
 // 		});
 

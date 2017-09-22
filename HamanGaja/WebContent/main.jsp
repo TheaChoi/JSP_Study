@@ -10,6 +10,22 @@
 	<meta name="viewport" content="width=device-width initial-scale=1 user-scalable=no">
 	<link href="css/mystyle.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<%
+		String USER = (String) session.getAttribute("USERID");
+		
+	%>
+	<script>
+		function loginCheck(){
+			
+			if(<%=USER%>!=null){
+				return true;
+			}else{
+				alert("로그인이 필요합니다.");
+				location.href="login.jsp";
+				return false;
+			}
+		}
+	</script>
 </head>
 <body>
 	<header class="header">
@@ -33,7 +49,7 @@
 	
 	<section class="main_visual">	
 		<header>
-			<h2 class="readonly">mai
+			<h2 class="readonly">
 			n visual</h2>
 		</header>
 		<div class="inner">
@@ -73,6 +89,7 @@
 				String title = list.get(i).getTitle();
 				String photo = list.get(i).getPhoto();
 				String content = list.get(i).getContent();
+				String type = list.get(i).getType();
 				if(photo==null){
 					photo="image/default.png";
 				}else{
@@ -80,7 +97,9 @@
 				}
 			%>
 			
-				<li><a href="#"><img src="<%=photo%>" alt="<%=title %>" class="imgw50" >
+ 				<li><a href="read.user?num=<%=num%>&pageNo=0&pageSize=5&viewStart=0&viewEnd=5&type=<%=type%>&search=" onClick="return loginCheck();">  <%--return 함수앞에써주면 값이 false일때 다음으로 안넘어감 --%>
+				<img src="<%=photo%>" alt="<%=title %>" class="imgw50" >
+				<!-- 위에 a 태그에서 readMain.user에 search를 안넘겨줬더니 userView거쳐서 list.user 갈때 오류남 -->
 				<span><%=title %></span><p><%=content %></p></a></li>  <!--class="imgw100"-->
 				
 			<%
