@@ -118,9 +118,9 @@
 			$(".bar-search").toggle();
 		});
 		
-		$("#map").click(function() 
-			$(".map").show();
-		}
+// 		$("#map").click(function() 
+// 			$(".map").show();
+// 		}
 	</script>
 
 

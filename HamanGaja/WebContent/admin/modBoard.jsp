@@ -124,21 +124,18 @@
 // 	}
 
 	function modPhoto() {
-		
-		//alert("modPhoto 들어옴");
-
+	
 		var formTag = $("form[name=fileupload]")[0]; //사진 전송 폼태그를 찾음
-		var formData = new FormData(formTag);  //폼태그=>폼데이타로 변경,  사진데이타=>폼데이타에 포함
-		
+		var formData = new FormData(formTag);  //폼태그=>폼데이타로 변경,  
+	                                         	//사진데이타=>폼데이타에 포함		
 		formData.append("pic", $("input[name=picture]")[0].files[0]);
 		formData.append("num", "<%=num%>");
 		
 		$.ajax({
-		
 			type:"POST",
-			encType:"multipart/form-data", //멀티파트전송
+			encType:"multipart/form-data", //MultipartRequest 전송
 			url:"modPhoto.board",
-			data:formData,
+			data:formData,  //FormData 전송
 			dataType:"JSON",
 			processData:false,
 			contentType:false,
@@ -149,8 +146,7 @@
 					alert("사진이 변경되었습니다.");
 					var newphoto = document.getElementById("newPhoto");  //사진띄우기장소
 					//alert(res.pic);
-					newphoto.src = "../upload/"+res.pic;
-					
+					newphoto.src = "../upload/"+res.pic;  		
 				}else{
 					alert("사진이 변경되지 않았습니다.");
 				}
